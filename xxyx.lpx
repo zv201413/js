@@ -1,0 +1,24 @@
+/*
+#!name=晓晓优选
+#!desc=获取token
+#!icon=https://www.flaticon.com/free-icon/smartphone_4634700
+
+------------------------------------------
+@Date: 2025.07.07
+@Description: 晓晓优选
+------------------------------------------
+脚本兼容：Surge、QuantumultX、Loon、Shadowrocket、Node.js
+只测试过QuantumultX，其它环境请自行尝试
+
+@Description:
+脚本兼容：Surge、QuantumultX、Loon、Shadowrocket，不支持青龙
+重写:打开软件，点击我的
+
+[Argument]
+xxyx-token = switch, true, false, tag = [晓晓优选]Token, desc = 获取[晓晓优选]Token
+
+[Script]
+http-request ^https:\/\/xxyx-client-api\.xiaoxiaoyouxuan\.com\/my script-path=https://gist.githubusercontent.com/Sliverkiss/991a81be1fc8cf2a1937432be68f5521/raw/xxyx.js, requires-body=true, timeout=60, enabled={xxyx-token}, tag=晓晓优选获取token
+
+[MITM]
+hostname = xxyx-client-api.xiaoxiaoyouxuan.com
