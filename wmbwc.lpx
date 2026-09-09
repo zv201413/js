@@ -8,7 +8,7 @@
 @Description: 歪麦霸王餐 Token 获取
 ------------------------------------------
 脚本兼容：Surge、QuantumultX、Loon、Shadowrocket
-重写：打开 app，自动抓取请求头中的 token 字段，写入持久化存储 wmbwc_data。
+重写：打开 app，自动抓取请求头中的 token 字段，维护 wmbwc_data 多账号数组（兼容原版签到脚本）。
 
 [Argument]
 wmbwc-token = switch, true, false, tag = [歪麦霸王餐]Token, desc = 获取[歪麦霸王餐]Token
