@@ -1,26 +1,21 @@
-/*
-#!name=歪麦金币
-#!desc=签到 + 用户信息 + 视频任务金币（复用 wmbwc_data 多账号；打开App自动触发 + 每日定时）
-#!icon=https://www.flaticon.com/free-icon/smartphone_4634700
+#!name = 歪麦金币
+#!desc = 签到 + 用户信息 + 视频任务金币（复用 wmbwc_data 多账号；打开App自动触发 + 每日定时）
+#!author = zv201413
+#!icon = https://www.flaticon.com/free-icon/smartphone_4634700
+#!tag = 签到,金币
+#!loon_version = 3.3.0(900)
 
-------------------------------------------
-@Date: 2026.09.09
-@Description: 歪麦霸王餐 简单版金币任务
-------------------------------------------
-脚本兼容：Surge、QuantumultX、Loon、Shadowrocket、Node.js
-数据来源：wmbwc_data 多账号数组（由「歪麦霸王餐获取token」插件维护，无需额外配置）
-触发方式：
-  1. App触发：打开 App 进"我的"页面时自动执行（拦截 api_user_info_one，同原版写法）
-  2. 每日定时：每天 09:30 自动跑一遍
-注意：请先安装 token 插件并打开过一次 App，确保 wmbwc_data 里已有账号。
+# 数据来源：wmbwc_data 多账号数组 [{"userId":"...","token":"...","userName":"..."}]
+# 由「歪麦霸王餐获取token」插件 + 原版签到脚本维护，无需额外配置
+# 前提：先装 token 插件并打开过一次 App，确保 wmbwc_data 里有账号
 
 [Argument]
 gold-task = switch, true, false, tag = [歪麦金币]任务开关, desc = 开启 App 自动触发 + 每日定时任务
+gold-cron = input, "0 30 9 * * *", tag = [歪麦金币]定时Cron, desc = 每日定时执行时间（秒 分 时 日 月 周，默认 09:30）
 
 [Script]
-task ^30 9 * * *$ script-path=https://gist.githubusercontent.com/zv201413/8a75d97445bcb3861dcb066fb5f5bfda/raw/simple_gold.js, tag=歪麦金币-每日任务, enabled={gold-task}, timeout=120
-http-request ^https:\/\/wmapp-api\.waimaimingtang\.com\/api\/api\/v2\/user\/api_user_info_one script-path=https://gist.githubusercontent.com/zv201413/8a75d97445bcb3861dcb066fb5f5bfda/raw/simple_gold.js, requires-body=true, timeout=120, enabled={gold-task}, tag=歪麦金币-App触发
+http-request ^https:\/\/wmapp-api\.waimaimingtang\.com\/api\/api\/v2\/user\/api_user_info_one script-path = https://gist.githubusercontent.com/zv201413/8a75d97445bcb3861dcb066fb5f5bfda/raw/simple_gold.js, requires-body = true, timeout = 120, tag = 歪麦金币-App触发, enable={gold-task}
+cron {gold-cron} script-path = https://gist.githubusercontent.com/zv201413/8a75d97445bcb3861dcb066fb5f5bfda/raw/simple_gold.js, timeout = 120, tag = 歪麦金币-每日任务, enable={gold-task}
 
 [MITM]
 hostname = wmapp-api.waimaimingtang.com
-*/
