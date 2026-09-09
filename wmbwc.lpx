@@ -4,22 +4,17 @@
 #!icon=https://www.flaticon.com/free-icon/smartphone_4634700
 
 ------------------------------------------
-@Date: 2025.07.07
-@Description: 歪麦霸王餐
+@Date: 2026.09.09
+@Description: 歪麦霸王餐 Token 获取
 ------------------------------------------
-脚本兼容：Surge、QuantumultX、Loon、Shadowrocket、Node.js
-只测试过QuantumultX，其它环境请自行尝试
-
-@Description:
-脚本兼容：Surge、QuantumultX、Loon、Shadowrocket，不支持青龙
-重写：打开app，进入我的页面。
-变量：wmbwc_data 格式：[{"userId":"userId","token":"token","userName":"userName"},{"userId":"userId","token":"token","userName":"userName"}]
+脚本兼容：Surge、QuantumultX、Loon、Shadowrocket
+重写：打开 app，自动抓取请求头中的 token 字段，写入持久化存储 waimai_token。
 
 [Argument]
 wmbwc-token = switch, true, false, tag = [歪麦霸王餐]Token, desc = 获取[歪麦霸王餐]Token
 
 [Script]
-http-request ^https:\/\/wmapp-api\.waimaimingtang\.com\/api\/api\/v2\/user\/api_user_info_one script-path=https://gist.githubusercontent.com/Sliverkiss/49a9ffb2169a2becc33bf4fdbf6eb99a/raw/wmbwc.js, requires-body=true, timeout=60, enabled={wmbwc-token}, tag=歪麦霸王餐获取token
+http-request ^https:\/\/wmapp-api-v2\.waimaimingtang\.com\/api\/.* script-path=https://gist.githubusercontent.com/zv201413/2023f0f07292635e81008d5d50f66ed3/raw/waimai_token.js, requires-body=true, timeout=10, enabled={wmbwc-token}, tag=歪麦霸王餐获取token
 
 [MITM]
-hostname = wmapp-api.waimaimingtang.com
+hostname = wmapp-api-v2.waimaimingtang.com
